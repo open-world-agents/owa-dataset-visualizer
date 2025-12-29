@@ -1,18 +1,32 @@
 # OWA Dataset Visualizer
 
-Browser-based visualizer for OWA recordings. Syncs MCAP input data with MKV video.
+Browser-based visualization tool for exploring OWAMcap datasets with synchronized playback of screen recordings and interaction events.
+
+<div align="center">
+  <img src="https://github.com/open-world-agents/open-world-agents/blob/main/docs/data/examples/viewer.png" alt="OWA Dataset Visualizer"/>
+</div>
+
+## 🌐 Public Hosted Viewer
+
+**Quick Start**: [https://huggingface.co/spaces/open-world-agents/visualize_dataset](https://huggingface.co/spaces/open-world-agents/visualize_dataset)
+
+Usage:
+
+1. Visit the viewer URL
+2. Either drag & drop local files, or enter a Hugging Face dataset ID
+3. Explore your data with synchronized video and input overlays
 
 ## Features
 
-- **HuggingFace Hub integration**: Browse and load datasets directly from HuggingFace
-- **Local file support**: Drag & drop or select MCAP + MKV files. No server uploads.
-- **Large file support**: Uses MCAP index for seeking. Never loads entire file.
-- **Input overlay**: Keyboard (all keys), mouse (L/R/M buttons, scroll wheel), cursor minimap
-- **Mouse mode**: Toggle Relative (FPS) / Absolute (2D/RTS). Recenter interval for relative.
-- **Seek handling**: Video pauses while loading state, resumes automatically.
-- **Info panels**: Active window info, MCAP topic stats
+- **Drag & Drop**: Load local `.mcap` + `.mkv` files directly in browser
+- **Hugging Face Integration**: Browse and load datasets via `?repo_id=org/dataset`
+- **Synchronized Playback**: Video synced with keyboard/mouse overlays
+- **Large File Support**: Uses MCAP index for seeking, never loads entire file
+- **Input Overlay**: Keyboard (all keys), mouse (L/R/M buttons, scroll), cursor minimap
 
-## Prerequisites
+## 🏠 Local Development
+
+### Prerequisites
 
 Install Node.js via [nvm](https://github.com/nvm-sh/nvm) (recommended):
 
@@ -21,37 +35,43 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install --lts
 ```
 
-## Usage
+### Run
 
 ```bash
+git clone https://github.com/open-world-agents/owa-dataset-visualizer
+cd owa-dataset-visualizer
 npm install
 npm run dev
 ```
 
-Open http://localhost:5173.
+Open http://localhost:5173
 
-**URL modes:**
+## 📂 Local File Server
 
-- Landing page: Browse featured datasets or load local files
-- `?repo_id=org/dataset`: Load HuggingFace dataset
-- `?base_url=http://localhost:8080`: Local file server mode
-- `?mcap=/test.mcap&mkv=/test.mkv`: Direct URL mode
-
-### Local File Server
-
-Serve a local directory for browsing multiple recordings:
+For browsing multiple recordings from a local directory:
 
 ```bash
+# Serve a directory containing mcap/video pairs
 python scripts/serve_local.py /path/to/recordings -p 8080
-```
 
-Then open `http://localhost:5173/?base_url=http://localhost:8080`
+# Open visualizer with local server
+# http://localhost:5173/?base_url=http://localhost:8080
+```
 
 Features:
 
 - Auto-scans for mcap/video pairs
 - HTTP Range support for streaming large videos
 - Multi-threaded for concurrent requests
+
+## URL Modes
+
+| URL                               | Description                         |
+| --------------------------------- | ----------------------------------- |
+| `/`                               | Landing page with featured datasets |
+| `?repo_id=org/dataset`            | Load HuggingFace dataset            |
+| `?base_url=http://localhost:8080` | Load from local file server         |
+| `?mcap=url&mkv=url`               | Direct file URLs                    |
 
 ## Structure
 
@@ -78,7 +98,3 @@ src/
 5. Find latest `window` info
 
 This enables O(snapshot interval) seek instead of O(file size).
-
-## Development
-
-**Message definitions**: Always reference `owa-msgs` for field names and types. Never guess message structure—check the schema source of truth.
