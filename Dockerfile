@@ -4,9 +4,9 @@ FROM node:20-alpine AS builder
 RUN apk add --no-cache git
 
 ARG CACHE_BUST=1
-RUN git clone --depth 1 https://github.com/open-world-agents/open-world-agents /owa
+RUN git clone --depth 1 https://github.com/open-world-agents/owa-dataset-visualizer /workspace
 
-WORKDIR /owa/projects/owa-dataset-visualizer
+WORKDIR /workspace
 RUN npm ci && npm run build
 
 # Stage 2: Serve with nginx
