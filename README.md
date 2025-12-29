@@ -3,7 +3,7 @@
 Browser-based visualization tool for exploring OWAMcap datasets with synchronized playback of screen recordings and interaction events.
 
 <div align="center">
-  <img src="https://github.com/open-world-agents/owa-dataset-visualizer/blob/main/.github/assets/viewer.png" alt="OWA Dataset Visualizer"/>
+  <img src="https://github.com/open-world-agents/owa-dataset-visualizer/blob/main/.github/assets/viewer.png?raw=true" alt="OWA Dataset Visualizer"/>
 </div>
 
 ## 🌐 Public Hosted Viewer
