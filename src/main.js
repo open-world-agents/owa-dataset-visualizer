@@ -115,12 +115,25 @@ function normalizeUrl(url) {
   return url;
 }
 
+// Show dataset link in side panel
+function showDatasetLink(repoId) {
+  const container = document.getElementById("dataset-link");
+  const anchor = document.getElementById("dataset-link-anchor");
+  const text = document.getElementById("dataset-link-text");
+  if (container && anchor && text) {
+    anchor.href = `https://huggingface.co/datasets/${repoId}`;
+    text.textContent = repoId;
+    container.classList.remove("hidden");
+  }
+}
+
 // Router
 const params = new URLSearchParams(location.search);
 const repoId = params.get("repo_id");
 const baseUrl = normalizeUrl(params.get("base_url"));
 
 if (repoId) {
+  showDatasetLink(repoId);
   initTreeViewer(() => fetchFileList(repoId));
 } else if (baseUrl) {
   initTreeViewer(() => fetchLocalFileList(baseUrl));
