@@ -11,7 +11,7 @@ RUN npm ci && npm run build
 
 # Stage 2: Serve with nginx
 FROM nginx:alpine
-ARG CACHE_BUST
+ARG CACHE_BUST=2026-01-12
 RUN echo "Cache bust: $CACHE_BUST"
 
 COPY --from=builder /workspace/dist /usr/share/nginx/html
