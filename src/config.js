@@ -1,6 +1,7 @@
 export const FEATURED_DATASETS = [
   "open-world-agents/D2E-480p",
   "open-world-agents/D2E-Original",
+  "open-world-agents/OSTask-demo",
   "open-world-agents/example_dataset",
   "open-world-agents/example-djmax",
   "open-world-agents/example-aimlab",
