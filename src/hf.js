@@ -11,7 +11,7 @@ export async function fetchFileList(repoId) {
 
   async function scanDir(path, node) {
     const items = await fetchTree(repoId, path);
-    const dirs = items.filter((i) => i.type === "directory");
+    const dirs = items.filter((i) => i.type === "directory" && !i.path.split("/").pop().startsWith("."));
     const files = items.filter((i) => i.type !== "directory");
 
     // Group files by basename and pair mcap with video
